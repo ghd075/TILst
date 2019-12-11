@@ -9,15 +9,19 @@
 ## Books 책내용정리
 
 <table text-align="center">
-    <tr>
-        <td width="30%">
+ <tr>
+  <td width="30%">
+        
         <a href="index/spring/guguSpring.md"><img width="50%" src="img/guguSpring.jpg"></img></a>
-* [코드로 배우는 스프링 웹 프젝(개정판)](index/spring/guguSpring.md)
+        
+          - [코드로 배우는 스프링 웹 프로젝트](index/springguguSpring.md) <br/>
+        
         </td>
         <td width="30%">
         </td>
         <td width="30%">
         </td>
+
     </tr>
 </table>
 
