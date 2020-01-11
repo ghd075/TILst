@@ -378,7 +378,7 @@ Map
   * <img width="90%" src="../img/exception.jpg"/>
 
 * Exception 클래스 하위클래스로 NullPointerException, NumberFormatException 등이 있다.
-  * <img width="90%" src="../img/exception2.jpg"/>
+  * <img width="90%" src="../img/exception2.JPG"/>
 
 **try ~ catch**
 
