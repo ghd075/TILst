@@ -5,6 +5,7 @@
 ## 강의내용정리
 
 * [자바 프로그래밍 입문 강좌 - 강의내용정리](java/java_basic.md)
+* [실전 JSP - 강의내용정리](jsp/jsp_basic.md)
 
 ## git
 
