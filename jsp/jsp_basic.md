@@ -1,5 +1,5 @@
 # 실전 JSP(renew ver.)
-> [인프러 강의](https://www.inflearn.com/course/%EC%8B%A4%EC%A0%84-jsp_renew#)를 듣고 내용 정리
+> [인프런 강의](https://www.inflearn.com/course/%EC%8B%A4%EC%A0%84-jsp_renew#)를 듣고 내용 정리
 
 > 이 강의는 JSP를 입문하기 전에 보면 딱 좋을 강의라고 생각한다.
 

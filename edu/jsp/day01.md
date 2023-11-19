@@ -205,9 +205,9 @@
 - 모든 자바 코드의 값은 문자열로 변환되어 웹 브라우저에 출력된다.
     - 기본 데이터 타입은 `toString()` 을 통해 출력된다.
 
-### 실습예제01 - [scripting.jsp]
+### 실습예제01 - [scripting.jsp] 소스
 
-```java
+```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -241,9 +241,9 @@
 
 <img width="90%" src="../../img/eud/jsp/day01/Untitled%2014.png"/>
 
-## index.jsp
+## [index.jsp] 소스
 
-```java
+```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -427,7 +427,7 @@
 
 # 4교시
 
-## IndexVO 소스
+## [IndexVO.java] 소스
 
 ```java
 package kr.or.ddit.index;
@@ -474,7 +474,7 @@ public class IndexVO {
 }
 ```
 
-## IndexRepository 소스
+## [IndexRepository.java] 소스
 
 ```java
 package kr.or.ddit.index;
@@ -607,9 +607,9 @@ public class IndexRepository {
 }
 ```
 
-## index.jsp 소스
+## [index.jsp] 소스
 
-```java
+```html
 <%@page import="kr.or.ddit.index.IndexVO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.index.IndexRepository"%>

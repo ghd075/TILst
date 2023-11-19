@@ -13,7 +13,7 @@
 
 ## 국비학원
 
-* [Jsp](edu/jsp/)
+* [Jsp](edu/jsp/index.md)
 
 ## Books 책내용정리
 
