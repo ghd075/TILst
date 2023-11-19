@@ -11,6 +11,10 @@
 
 * [git 기본 사용법](git/commend.md)
 
+## 국비학원
+
+* [Jsp](edu/jsp/)
+
 ## Books 책내용정리
 
 <table text-align="center">
@@ -19,7 +23,7 @@
  
 <a href="index/spring/guguSpring.md"><img width="60%" src="img/guguSpring.jpg"/></a>
 
-- [코드로 배우는 스프링 웹 프젝](index/spring/guguSpring.md) -읽는 중 <br/>
+- [코드로 배우는 스프링 웹 프로젝트](index/spring/guguSpring.md) -읽는 중 <br/>
 </td>
 <td width="30%">
 
