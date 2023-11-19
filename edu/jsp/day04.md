@@ -1231,3 +1231,5 @@ pageContext → request → session → application 순으로 범위의 크기�
 ```
 
 <img width="90%" src="../../img/eud/jsp/day04/Untitled%2025.png"/>
+
+### [뒤로 가기](index.md)
