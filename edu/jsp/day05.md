@@ -2369,3 +2369,5 @@ wrap="hard” 속성이 적용되려면 아래처럼 CSS 스타일 적용을 해
 <img width="90%" src="../../img/eud/jsp/day05/Untitled%2034.png"/>
 
 <img width="90%" src="../../img/eud/jsp/day05/Untitled%2035.png"/>
+
+### [뒤로 가기](index.md)
