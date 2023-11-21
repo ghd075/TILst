@@ -73,7 +73,7 @@
 		처리한 결과를 보여줍니다.
 ```
 
-<img width="90%" src="../../img/eud/jsp/day04/Untitled.png"/>
+<img width="90%" src="../../img/eud/jsp/day04/Untitled.png"/><br/>
 
 ```markdown
 02장 스크립트 태그 : 시작 페이지 만들기
@@ -163,21 +163,22 @@
     
     - 게시글 등록, 수정, 삭제
     
-<img width="90%" src="../../img/eud/jsp/day04/Untitled%201.png"/>
-    
-    - HttpServletResponse가 가지고 있는 `sendRedirect()` 메소드를 사용
-    - 리다이렉트 방법으로 이동한 페이지는 이전 페이지와 전혀 데이터를 공유하거나 주고받는 것이 없다.
-        - **주소가 바뀌면 `request` 내장 객체가 소멸되고 새로운 `request` 내장 객체를 생성한다.**
-        - **그래서 `session` 내장 객체에 데이터를 담아서 보내야 함**
-    - 실제로 데이터를 공유할 수 없다.
-    - 리다이렉트 하게 되면 이동할 페이지로 요청과 응답 객체를 새로 생성하여 전송하기 때문이다.
-    - 리다이렉트는 페이지를 재요청하는 것이며, URL을 보면 리다이렉트 시 해당 JSP 파일의 이름으로 변경되어 있을 것이다.
-    - 서버는 클라이언트에게 HTTP 상태코드 302로 응답하는데 이때 헤더 내 Location 값에 이동할 URL을 추가한다. 클라이언트는 리다이렉션 응답을 받게 되면 헤더(Location)에 포함된 URL로 재요청을 보내게 된다. 이때 브라우저 주소창은 새 URL로 바뀌게 된다.
-    - 클라이언트는 서버로부터 받은 상태 값이 302이면 Location헤더값으로 재요청을 보내게 된다. 이때 브라우저의 주소창은 전송받은 URL로 바뀌게 된다.
+<img width="90%" src="../../img/eud/jsp/day04/Untitled%201.png"/><br/>
+
+- HttpServletResponse가 가지고 있는 `sendRedirect()` 메소드를 사용
+- 리다이렉트 방법으로 이동한 페이지는 이전 페이지와 전혀 데이터를 공유하거나 주고받는 것이 없다.
+    - **주소가 바뀌면 `request` 내장 객체가 소멸되고 새로운 `request` 내장 객체를 생성한다.**
+    - **그래서 `session` 내장 객체에 데이터를 담아서 보내야 함**
+- 실제로 데이터를 공유할 수 없다.
+- 리다이렉트 하게 되면 이동할 페이지로 요청과 응답 객체를 새로 생성하여 전송하기 때문이다.
+- 리다이렉트는 페이지를 재요청하는 것이며, URL을 보면 리다이렉트 시 해당 JSP 파일의 이름으로 변경되어 있을 것이다.
+- 서버는 클라이언트에게 HTTP 상태코드 302로 응답하는데 이때 헤더 내 Location 값에 이동할 URL을 추가한다. 클라이언트는 리다이렉션 응답을 받게 되면 헤더(Location)에 포함된 URL로 재요청을 보내게 된다. 이때 브라우저 주소창은 새 URL로 바뀌게 된다.
+- 클라이언트는 서버로부터 받은 상태 값이 302이면 Location헤더값으로 재요청을 보내게 된다. 이때 브라우저의 주소창은 전송받은 URL로 바뀌게 된다.
         
-<img width="90%" src="../../img/eud/jsp/day04/Untitled%202.png"/>
-        
-    - 리다이렉트는 `reguest` 객체가 소멸되고 재생성되므로 `session`에다가 데이터를 담아서 요청해야 함
+<img width="90%" src="../../img/eud/jsp/day04/Untitled%202.png"/><br/>
+
+- 리다이렉트는 `reguest` 객체가 소멸되고 재생성되므로 `session`에다가 데이터를 담아서 요청해야 함
+
 - **포워드 - 게시판 목록 조회(ajax에서 많이 활용)**
   
     ⇒ 페이지만 요청할 때 사용
@@ -1154,6 +1155,8 @@ pageContext → request → session → application 순으로 범위의 크기�
 ```
 
 <img width="90%" src="../../img/eud/jsp/day04/Untitled%2024.png"/>
+
+### [response03.jsp] 소스
 
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
