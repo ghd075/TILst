@@ -737,7 +737,7 @@ form태그를 활용함에 있어 가장 중요하고 데이터를 담당할 수
 
 `request.getContextPath()` : 배포된 서버 안의 프로젝트 폴더를 가리킨다.
 
-**request.getServletContext().getRealPath()**로 배포된 서버 경로에 접근할 수 있다.
+`request.getServletContext().getRealPath()`로 배포된 서버 경로에 접근할 수 있다.
 
 ### 🎈 Interface ServletContext
 
@@ -854,6 +854,194 @@ input 요소들의 데이터를 읽어 action에 설정되어 있는 경로로 �
 
 3) 폼 페이지에서 입력된 데이터 값을 핸들러 함수로 가져오기 위해 form 태그의 name 속성 또는 forms 객체를 이용합니다.
 forms 객체를 이용하는 경우, forms 객체는 배열의 형태이기 때문이 length로 크기를 알 수 있고 배열 값인 index는 form 태그가 나타내는 순서로 0부터 시작합니다.
+
+-----
+<br/>
+
+# 10장 시큐리티
+
+- 인증은 유저나 디바이스의 신원을 증명하는 행위입니다.
+- 인가는 유저나 디바이스에게 접근권한을 부여하거나 거부하는 행위입니다.
+- 인증은 인가 의사결정의 한 요소가 될 수 있습니다.
+- 인가 가공물(토큰)로 유저나 디바이스의 신원을 파악하는 방법은 유용하지 않습니다.
+
+## 시큐리티의 개요
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities01.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities02.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities03.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities04.png"/>
+
+## 선언적 시큐리티 처리
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities05.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities06.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities07.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities08.png"/>
+
+`url-patten`은 사용자가 접근해야 할 target이 된다.
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities09.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities10.png"/>
+
+톰캣에 설정되어 있는 역할명과 동일해야 함
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities11.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities12.png"/>
+
+기본적으로 NONE을 기본값으로 많이 사용하고 나머지 두가지 옵션에 대해서는 잘 사용하지 않는다.
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities13.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities14.png"/>
+
+BASIC, FORM을 주로 사용하고, SSL 인증성를 보유하고 있다면 CLENT-CERT도 가끔 사용함
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities15.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities16.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities17.png"/>
+
+로그인 성공시 `form-login-config`태그에 설정한 URL페이지로 이동, 로그인 실패시 `form-error-page`태그에 설정한 URL페이지로 이동
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities18.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities19.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities20.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities21.png"/>
+
+
+시큐리티 인증 방식은 개발자가 직접 처리하지 않고, 서버에 등록된 역할 정보 기반으로 사용자 인증을 처리한다.
+
+## 프로그래밍적 시큐리티 처리
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities22.png"/>
+
+`getUserPrinciple()` : 사용자정보가 여기에 담기게 된다.
+
+<img width="90%" src="../../img/eud/jsp/jsp_10_securities23.png"/>
+
+## 📌JSP 시큐리티 web.xml 설정
+
+### 1. 시큐리티 역할 설정하는 방법
+  ```xml
+  <security-role>
+    <role-name>role1</role-name>		// 역할 이름
+  </security-role>
+  ```
+  
+### 2. 시큐리티 제약 사항 설정하기
+  ```xml
+  <security-constraint>
+    <web-resource-collection></web-resource-collection>	// 웹 자원에 대한 접근 설정
+    <auth-constraint></auth-constraint>					// 웹 자원에 접근할 수 있는 인증된 사용자 설정
+    <user-data-constraint></user-data-constraint>		// 데이터 전송 시 데이터 보호를 설정
+  </security-constraint>	
+  ```
+  
+### 2-1 웹 자원에 대한 접근 설정
+  ```xml
+  <web-resource-collection>
+    <web-resource-name>JSPBookProject</web-resource-name>		// 웹 자원의 이름을 설정하며 생략할 수 있다.
+    <url-pattern>/ch10/security02.jsp</url-pattern>				// 접근 제한을 요청할 때 URL 목록을 설정
+    <http-method>GET</http-method>								// HTTP메소드를 설정(GET, POST)
+  </web-resource-collection>
+  ```
+
+### 2-2 웹 자원에 접근할 수 있는 인증된 사용자 설정
+  - auth-constraint를 설정하지 않으면 웹 서버는 사용자 인증을 요구하지 않고 사용자의 요청을 승인한다.
+    ```xml
+      <auth-constraint>
+        <description></description>			// 설명
+        <role-name>role1</role-name>		// 반드시 tomcat-users.xml에 등록된 역할과 사용자여야 한다.
+    </auth-constraint>			
+    ```
+
+### 2-3 클라이언트와 서버 간에 데이터를 전송할 때 데이터를 보호하는 방법을 설정
+  - NONE : 기본 값으로 데이터를 보호하지 않을 때
+  - INTEGRAL : 전송 중 데이터가 변경되지 않았음을 보장(데이터 무결성)
+  - CONFINENTIAL : 전송 중 데이터를 아무도 훔쳐보지 않았음을 보장(데이터 기밀성)
+    ```xml
+      <user-data-constraint>
+        <transport-guarantee>NONE</transport-guarantee>
+      </user-data-constraint>
+    ```
+
+### 3. 시큐리티 인증 설정하기
+  ```xml
+  <login-config>
+    <auth-method>FORM</auth-method>				// 웹 자원에 대한 인증 처리 방식 설정
+      <realm-name></realm-name>					// 웹 자원에 접근할 수 있는 사용자 설정
+    <form-login-config></form-login-config>		// 데이터 전송 시 데이터 보호를 설정
+  </login-config>   		  		
+  ```
+### 3-1 웹 애플리케이션의 인증 처리 기법을 설정하는 요소
+  - BASIC : 웹 자원을 보호하는 간단하고 일반적인 방법
+  - DIGEST : 암호화 메커니즘을 이용하여 전송 (많이 사용되지 않음)
+  - FORM : [대표적] 일반적인 폼 페이지를 이용하여 로그인 정보를 서버에 전송하는 방식
+    - 암호화되지 않은 로그인 정보를 그대로 전송
+    
+    🎈 FORM 기반 인증시에는 별도 form 처리가 필요하다
+  - CLIENT-CERT : 클라이언트가 인증서를 가지고 공인 키 인증 방식을 사용하여 로그인하는 방식
+        클라이언트가 인증서를 가지고 있어야만 로그인되므로 비즈니스 환경에서만 적용
+    ```xml
+      <auth-method>FORM</auth-method>
+    ```
+
+### 3-2 기본 인증의 영역 이름을 설정
+  - FORM 기반 인증이나 다른 인증 방법에 필요하지 않기 때문에 아무런 영향을 미치지 않지만, 데이터를 문서화하는데 일반적으로 사용
+    ```xml
+    <realm-name>영역 이름</realm-name>
+    ```
+    
+### 3-3 인증 처리를 우히나 로그인 및 오류 페이지를 설정
+  - auth-method 요소가 FORM 기반 인증 처리 기법으로 설정되었을 때 사용
+    ```xml
+    <form-login-config>
+      <form-login-page>/ch10/login.jsp</form-login-page>
+      <form-error-page>/ch10/login_failed.jsp</form-error-page>
+    </form-login-config>
+    ```
+
+## 10장 요약 정리
+### 01. 시큐리티란 무엇인가?
+
+시큐리티는 허가된 사용자만이 특정 웹 페이지에 접근할 수 있도록 제한하는 보안 기능을 말합니다.
+
+시큐리티는 사용자가 권한이 없는 데이터에 접근하는 것을 막거나 웹 공격자가 전송 데이터를 중간에 가로채는 것을 방지하는 등 중요한 역할을 합니다.
+
+###  02. 시큐리티의 두 가지 기법에 대해 간단히 설명하시오.
+
+**1) 선언적 시큐리티**
+
+  웹 애플리케이션 배포 설명자(`web.xml`)파일에 보안 구성을 작성하여 수행하는 방식입니다.
+
+  web.xml 파일에는 보안 역할, 보안 제약 사항, 인증 처리 등을 설정하여 보안을 구성합니다.
+
+ **2) 프로그래밍적 시큐리티**
+ 
+ 웹 애플리케이션의 보안을 위해 코드를 작성하여 사용자의 권한 부여를 처리하는 방식입니다.
+        	
+선언적 시큐리티의 보안으로 충분하지 않을 때 `request` 내장 객체의 메소드를 사용하여 사용자를 승인하는 방법입니다.
+
+### 03. form 기반 인증 처리 방법으로 로그인 페이지를 작성하는 방법을 설명하시오.            
+
+|속성 이름 				|속성 값|
+|------|---|
+| form 태그의 action 속성	 | j_security_check |
+| 사용자의 name 속성				 | j_username |
+| 비밀번호의 name 속성				 | j_password |
 
 
 
