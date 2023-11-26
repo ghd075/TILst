@@ -20,6 +20,7 @@
   - 타임아웃은 서버가 시작될 때 몇 초 내에 시작이 안 되면 시작 실패라고 간주하므로 넉넉하게 2분으로 설정해주는거다.
 
 웹 경로는 톰캣이 실행되는 웹 루트 디렉터리를 말한다. 이클립스에서 프로젝트에 톰캣을 연동하면 `/프로젝트 이름` 형식을 기본값으로 연동된다. 대부분의 웹사이트는 / 경로부터 시작하므로 `/프로젝트 이름` 웹 경로를 최상위 경로인 /로 변경해준다.
+
 -----
 </br>
 
@@ -157,26 +158,26 @@
 ## 스크립트 태그 종류
 ### 선언 태그
 
-<img width="90%" src="../../img/eud/jsp/jsp_02_scripting01.png"/>
+<img width="70%" src="../../img/eud/jsp/jsp_02_scripting01.png"/>
 
 - 해당 JSP 페이지의 모든 스크립트 태그가 참조할 수 있는 **전역변수**가 된다.
     - 해당 JSP 페이지의 어느 위치에서도 참조할 수 있다.
 - 각 행은 반드시 세미콜론으로 끝나야 한다.
 
 ### 주석 태그
-<img width="90%" src="../../img/eud/jsp/jsp_02_scripting02.png"/>
+<img width="70%" src="../../img/eud/jsp/jsp_02_scripting02.png"/>
 
 - HTML 주석을 사용하면 그 안에 포함된 표현문 태그와 스크립틀릿 태그가 모두 컴파일된다.
 - JSP 주석일 경우 주석문 안에 포함된 코드를 모두 무시한다.
 
 ### 스크립틀릿 태그
-<img width="90%" src="../../img/eud/jsp/jsp_02_scripting03.png"/>
+<img width="70%" src="../../img/eud/jsp/jsp_02_scripting03.png"/>
 
 - 이 태그에 선언된 변수는 **지역변수**가 되므로 스크립틀릿 태그 내에서만 사용할 수 있다.
 - 스크립틀릿 태그 내의 마지막 행은 반드시 세미콜론으로 종료해야 한다.
 
 ### 표현식
-<img width="90%" src="../../img/eud/jsp/jsp_02_scripting04.png"/>
+<img width="70%" src="../../img/eud/jsp/jsp_02_scripting04.png"/>
 
 - 모든 자바 코드의 값은 문자열로 변환되어 웹 브라우저에 출력된다.
     - 기본 데이터 타입은 `toString()` 을 통해 출력된다.
@@ -289,7 +290,7 @@
 - 현재 JSP 페이지에 표현 언어, JSTL, 사용자 정의 태그(custom tag) 등 태그 라이브러리를 설정하는 태그
 - /WEB-INF/lib/ 폴더에 JSTL 태그 라이브러리인 JSTL-1.2.jar 파일 추가
 
-<img width="90%" src="../../img/eud/jsp/jsp_03_taglib01.png"/>
+<img width="50%" src="../../img/eud/jsp/jsp_03_taglib01.png"/>
 
 <img width="90%" src="../../img/eud/jsp/jsp_03_taglib02.png"/>
 
@@ -544,11 +545,11 @@ header 정보 중 , Refresh 헤더를 이용해 5초마다 페이지를 새로�
 
 **select 태그의 속성**
 
-<img width="90%" src="../../img/eud/jsp/jsp_06_form06.png"/>
+<img width="50%" src="../../img/eud/jsp/jsp_06_form06.png"/>
 
 **option 태그의 속성**
 
-<img width="90%" src="../../img/eud/jsp/jsp_06_form07.png"/>
+<img width="50%" src="../../img/eud/jsp/jsp_06_form07.png"/>
 
 ### textarea태그
 - 여러 줄의 텍스트를 입력할 수 있는 태그
@@ -629,6 +630,150 @@ form태그를 활용함에 있어 가장 중요하고 데이터를 담당할 수
 | 	getParameter()	 | String											 | input 요소의 name을 key로 문자열 형식의 데이터를 전달받습니다.  |
 | 	getParameterValues()	 | String[]							 | input 요소의 name을 key로 여러 데이터를 배열 형식의 데이터로 전달받습니다.   |
 
+-----
+<br/>
 
+# 7장 파일 업로드
+
+## 파일 업로드를 위한 JSP 페이지
+
+<img width="90%" src="../../img/eud/jsp/jsp_07_fileUpload01.png"/>
+
+- form 태그의 method 속성은 반드시 **POST 방식**으로 설정
+- form 태그의 enctype 속성은 반드시 **multipart/form-data**로 설정
+- form 태그의 action 속성은 **파일 업로드를 처리할 JSP 파일**로 설정
+- 파일 업로드를 위해 **input 태그의 type 속성을 file**로 설정
+  - 만약 여러 파일을 업로드하려면 2개 이상의 input 태그를 사용하고 name 속성에 서로 다른 값을 설정
+
+## Commons-FileUpload
+
+- 파일 업로드 패키지
+- 서버의 메모리상에서 파일 처리가 가능하도록 지원
+- 오픈 라이브러리 commons-fileupload.jar, commons-io.jar 파일을 배포 사이트에서 직접 다운로드해서 사용
+  - 배포 사이트: `http://commons.apache.org/downloads/`
+  - 다운로드 파일: `commons-fileupload-1.3.3-bin.zip`, `commons-io-2.6-bin.zip`
+- JSP 페이지에 page 디렉티브 태그의 import 속성을 사용하여 패키지 `org.apache.commons.fileupload.*`를 설정
+
+<br/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_07_fileUpload02.png"/>
+
+<br/>
+
+① 필수적으로 선언해줘야 함(파일 업로드 핸들러 생성)
+
+② 파일 데이터들은 list객체로 하나씩 차곡차곡 쌓아서 담는다.
+
+`iterator()`라는 조력자를 통해서 list 안에 있는 값을 하나씩 꺼내준다.
+
+③ `hasNex()` 메소드를 통해 다음 요소에 읽어 올 요소가 없을 때까지 반복한다.
+
+`isFormField()` 메소드를 통해 파일인지 확인한다.
+
+일반 데이터(true)면 일반 데이터 형식으로 꺼내오고,
+
+파일 데이터(false)면 파일 데이터 형식으로 꺼내온다.
+
+`getName()` 으로 가져오게 되면 파일명만 추출되는 것이 아니라, 시스템 내에 있는 **‘경로 + 파일명’**을 가져오기 때문에 `substirng(fileName.lastIndexOf("\\")+1);`을 해서 파일 경로까지 자르고 +1된 문자열부터 가져온다.
+
+### DiskFileUpload 클래스의 메소드
+
+<img width="90%" src="../../img/eud/jsp/jsp_07_fileUpload03.png"/>
+
+### FileItem 클래스의 메소드
+
+<img width="90%" src="../../img/eud/jsp/jsp_07_fileUpload04.png"/>
+
+🎈 스프링에서도 xml에 설정할 때 1번 ~ 3번까지 똑같이 설정해주어야 한다.
+
+스크립틀릿에서 설정해야 하는 기본 옵션들이다.
+
+서버에 바로 저장하지 않고 임시 파일 tmp를 만들고 데이터가 쌓여지면, 내가 원하는 파일 형태로 변경 후 뿌려준다.
+
+메모리 공간 크기를 설정하기 위해 **setSizeThreshold** 메소드를 사용한다.
+
+🏆JSP에서는 파일업로드를 사용하기 위해서는 아래처럼 라이브러리 2개를 추가해줘야 한다.
+
+<img width="60%" src="../../img/eud/jsp/jsp_07_fileUpload05.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_07_fileUpload06.png"/>
+
+## GET 방식, POST 방식
+
+<img width="90%" src="../../img/eud/jsp/jsp_get_post.png"/>
+
+기본적으로 브라우저에 요청할 때 **header영역**과 **body영역**으로 나눠져 데이터를 담아서 전송하게 된다. 이 때 **GET방식**으로 보내게 되면 헤더에 Key:Value형태로 담기게 되는데 Key은 쿼리스트링의  id값이고, Value는 input태그의 name값이다. 바디에는 아무 값도 안 담기게 된다.
+
+**POST방식**으로 보내게 되면 헤더에는 쿼리스트링의 ID값이 담기고, 바디에는 내가 보내고자 하는 데이터 값들이 담기게 된다. 보안상의 이유로 POST방식을 사용하게 된다.
+
+### GET방식
+
+- 데이터를 가져오는 것
+- URL에 정보가 담겨서 전송된다.
+- input태그에 담긴 name값이 header에 담기게 된다.
+
+### POST방식
+
+- 데이터를 가공해서 처리하는 것
+- URL 상에 전달한 정보가 표시되지 않는다.
+- header의 body에 담겨서 전송된다.
+
+🥶개발자 도구에서 내가 요청한 URL 주소를 클릭 후 Payload 탭에서 데이터 전달 여부를 확인할 수 있다.
+
+<img width="90%" src="../../img/eud/jsp/jsp_07_data.png"/>
+
+## 웹 상에 파일을 저장하는 경로
+
+`C:\upload\파일명.png` ⇒ 내 로컬 PC에서 사용하는 경로지. 서버에 접근할 수 잇는 경로를 아니다.
+
+### **톰캣에 파일이 저장되는 경로 찾기(배포된 서버 파일 경로)**
+`E:\A_TeachingMaterial\07_JSP_Spring\workspace\workspace_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\JSPBook\upload` 
+
+아파치 톰캣에 파일이 저장하게 되면 위 경로처럼 metadata 폴더에 해당 프로젝트에 해당되는 upload 폴더에 저장하게 된다.
+
+`http://localhost/JSPBook/upload/고양이.PNG` 주소를 치면 웹 서버상에 저장된 리소스 파일을 볼 수 있다.
+
+서버에 배포할 때는 다음같이 주소를 지정해주어야 파일을 저장할 수 있다.
+
+`request.getContextPath()` : 배포된 서버 안의 프로젝트 폴더를 가리킨다.
+
+**request.getServletContext().getRealPath()**로 배포된 서버 경로에 접근할 수 있다.
+
+### 🎈 Interface ServletContext
+
+- 파일의 MIME유형을 가져오거나 요청을 발송하거나 로그 파일에 쓰기 위해 서블릿이 서블릿 컨테이너와 통신하는데 사용하는 메서드를 정의
+- JVM당 웹 어플리케이션당 하나의 컨텍스트가 존재
+
+### 🎈 ServletContext.getRealPath(String path)
+
+- 웹 어플리케이션의 컨텍스트 루트를 기준으로 지정된 경로의 실제 파일 시스템 경로를 반환
+- 즉, 웹 어플리케이션에서 사용되는 리소스(ex. 이미지,HTML,CSS 등)의 실제 파일 시스템 경로를 얻을 수 있다
+- 웹 어플리케이션의 배포 디렉토리가 변경되더라도 어플리케이션 코드를 수정할 필요 없이 정확한 경로를 얻을 수 있도록 하는데 사용
+
+### 🎈 getRealPath("/WEB-INF/images/" + fileName)
+
+- `'/WEB-INF/images/'` 이란 폴더에 'fileName'이라는 이름의 파일이 위치한 경로: `'/WEB-INF/images'`의 경로를 얻어오고, 이를 기준으로 파일 경로를 지정
+
+**String realFolder = request.getRealPath("/") + "upload";**
+
+위 코드를 현재 유지보수 기간이 끝나서 이방법을 협업에서는 사용하지 않는다.
+
+## 7장 요약 정리
+## 01.  파일 업로드를 위한 form 태그 내에 반드시 설정해야 하는 기법은 무엇인가?
+
+  1) form 태그의 method 속성은 반드시 'POST'로 설정한다.
+  2) form 태그의 enctype 속성은 반드시 'multipart/form-data'로 설정한다.
+  3) form 태그의 action 속성은 파일 업로드를 처리할 JSP 파일로 설정한다.  (JSP 파일 또는 경로 또는 서버에 해당하는 URL)
+  4) 파일 업로드를 위해 input 태그의 type 속성을 file로 설정한다 (여러 파일 설정시 multiple 속성을 부여한다)
+    
+## 02.  파일을 서버에 업로드하는 처리 기법에 대해 간단히 설명하시오.
+
+  🎈 우리는 Commons 를 활용한 파일 업로드를 진행하므로 `Cors.jar` 를 활용한 파일 업로드를 진행하지 않는다.
+    
+  1) `Commons-fileupload`를 이용한 파일 업로드
+    
+  `Commons-fileupload`를 이용하여 파일을 업로드 하려면 먼저 `Commons-fileupload` 패키지에 포함되어 있는 `DiskFileUpload` 객체를 생성한다. 생성된 객체를 통해 `DiskFileUpload` 클래스가 제공하는 메소드를 사용하여 웹 브라우저가 전송한 `multipart/form-data` 유형의 요청 파라미터를 가져온다. 그러나 `FileItem` 클래스의 메소드를 사용하여 요청 파라미터가 일반 데이터인지 파일인지 분석 처리하여 파일을 업로드한다.
+
+  
 
 ### [뒤로 가기](./../../../..)
