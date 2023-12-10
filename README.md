@@ -15,6 +15,10 @@
 
 * [Jsp](edu/jsp/index.md)
 
+## IDE
+
+* [이클립스(Eclipse) 디버깅 하는법](ide/debug.md)
+
 ## Books 책내용정리
 
 <table text-align="center">
