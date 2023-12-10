@@ -1133,4 +1133,91 @@ BASIC, FORM을 주로 사용하고, SSL 인증성를 보유하고 있다면 CLEN
 	<error-page>
   ``` 
 
+-----
+<br/>
+
+# 12장 필터
+## 필터 개요
+- 클라이언트와 서버 사이에서 request와 response 객체를 먼저 받아 사전/사후 작업 등 공통적으로 필요한 부분을 처리하는 것
+- 필터는 HTTP 요청과 응답을 변경할 수 있는 코드로 재사용 가능
+- 클라이언트와 정적 리소스 사이에 여러 개의 필터로 이루어진 필터로 필터 체인을 제공하기도 함
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter01.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter02.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter03.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter04.png"/>
+
+필터를 초기화하도록 `init()` 메소드를 작성
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter05.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter06.png"/>
+
+연속적으로 필터가 있으면 다음 필터로 제어를 넘기도록 **FilterChain** 객체 타입의 `doFilter()` 메소드를 작성
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter07.png"/>
+
+필터를 종료하기 전에 호출하도록 `destroy()` 메소드를 작성
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter08.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter09.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter10.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter11.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_filter12.png"/>
+
+<img width="90%" src="../../img/eud/jsp/jsp_12_sumary.png"/>
+
+공통적인 기능을 구현하거나 이 사용자가 허가된 사용자인지 구분하기 위해 사용한다.
+
+중간관리자, 문지기같은 역할을 수행한다.
+
+사용자인증처리, 데이터 암호화, 접속로그기록, 데이터 압축 및 변환 기능, 한글 인코딩 처리 등 다양한 분야에 활용된다.
+
+데이터베이스에 접근하기 전이고, 서버에 접근하기 전에 필터를 거쳐서 처리하게 된다.
+
+## 12장 요약 정리
+### 01. 필터란 무엇인가?
+
+  필터는 클라이언트와 서버 사이에서 request와 response객체를 먼저 받아 사전/사후 작업 등 공통적으로 필요한 부분을 처리하는 것을 말한다.
+
+### 02. Filter 인터페이스에 있는 메소드의 종류와 기능을 설명하시오.
+	
+  - `init()` : 필터 인스턴스의 초기화 메소드입니다.
+  - `doFilter()` : 필터 기능을 작성하는 메소드입니다.
+  - `destroy()` : 필터 인스턴스의 종료 전에 호출되는 메소드입니다.
+
+### 03. `web.xml` 파일에 필터를 구성하는 요소의 종류를 설명하시오.
+  **1) `<filter>`**
+  - 웹 애플리케이션에서 자바 필터와 매개변수를 설정하는데 사용
+
+  ```xml
+  <filter>
+    <filter-name>필터 이름</filter-name>
+    <filter-class>클래스 위치 및 이름(패키지 포함)</filter-class>
+    [
+      <init-param>
+        <param-name>매개변수 이름</param-name>
+        <param-value>매개변수 값</param-value>
+      </init-param>
+    ]
+  </filter>
+  ```
+
+  **1) `<filter-mapping>`**
+	- 특정 리소스에 대해 어떤 필터를 사용할지 설정하는데 사용  
+
+  ```xml
+  <filter-mapping>
+    <filter-name>필터 이름</filter-name>
+    <url-pattern>요청 URL 패턴</url-pattern>
+  </filter-mapping>
+  ```  
+
 ### [뒤로 가기](./../../../..)
